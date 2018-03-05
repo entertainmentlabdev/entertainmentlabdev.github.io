@@ -143,14 +143,24 @@ function init() {
 
   //Drew's animation code, source: https://threejs.org/examples/webgl_loader_fbx.html
   var loader = new THREE.FBXLoader();
-  loader.load( 'assets/fbx/Spongebob_Animation_v01.fbx', function (object) {
+  loader.load( 'assets/fbx/JellyFish_2.fbx', function (object) {
     object.mixer = new THREE.AnimationMixer(object);
     mixers.push(object.mixer);
 
     var action = object.mixer.clipAction(object.animations[0]);
     action.play();
+    for (var i = 0; i < BOX_QUANTITY; i++) {
+      var angle = Math.PI * 2 * (i / BOX_QUANTITY);
+  //    var geometry = new THREE.BoxGeometry(BOX_SIZE, BOX_SIZE, BOX_SIZE);
+    //  var material = new THREE.MeshNormalMaterial();
+    //  var object = new THREE.Mesh(geometry, material);
+      object.position.set(Math.cos(angle) * BOX_DISTANCE, camera.position.y - 0.25, Math.sin(angle) * BOX_DISTANCE);
+      scene.add(object);
+    }
 
-    scene.add(object);
+    //object.position.set(Math.cos(angle) * BOX_DISTANCE, camera.position.y - 0.25, Math.sin(angle) * BOX_DISTANCE);
+    //scene.add(object);
+
   });
 
   // Kick off the render loop!
