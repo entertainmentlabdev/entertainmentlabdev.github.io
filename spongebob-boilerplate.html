@@ -77,9 +77,6 @@
 
 <script src="https://threejs.org/examples/js/libs/inflate.min.js"></script>
 <script src="https://threejs.org/examples/js/loaders/FBXLoader.js"></script>
-<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
-<script src="https://threejs.org/examples/js/Detector.js"></script>
-<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
 
 <script>
 
@@ -146,7 +143,7 @@ function init() {
 
   //Drew's animation code, source: https://threejs.org/examples/webgl_loader_fbx.html
   var loader = new THREE.FBXLoader();
-  loader.load( 'assets/Spongebob_Animation_v01.fbx', function (object) {
+  loader.load( 'assets/fbx/Spongebob_Animation_v01.fbx', function (object) {
     object.mixer = new THREE.AnimationMixer(object);
     mixers.push(object.mixer);
 
