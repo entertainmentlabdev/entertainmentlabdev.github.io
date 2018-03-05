@@ -84,7 +84,7 @@ var vrDisplay, vrControls, arView;
 var canvas, camera, scene, renderer;
 var BOX_DISTANCE = 1.5;
 var BOX_SIZE = 0.25;
-var BOX_QUANTITY = 6;
+var BOX_QUANTITY = 1;
 var boxesAdded = false;
 
 var mixers = [];
@@ -151,7 +151,7 @@ function init() {
     for (var i = 0; i < BOX_QUANTITY; i++) {
       var angle = Math.PI * 2 * (i / BOX_QUANTITY);
       object.position.set(Math.cos(angle) * BOX_DISTANCE, camera.position.y - 0.25, Math.sin(angle) * BOX_DISTANCE);
-      object.scale.set(0.5, 0.5, 0.5);
+      object.scale.set(0.01, 0.01, 0.01);
       scene.add(object);
     }
   });
