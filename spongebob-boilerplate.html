@@ -87,7 +87,6 @@ var BOX_SIZE = 0.25;
 var BOX_QUANTITY = 6;
 var boxesAdded = false;
 
-var mesh;
 var mixers = [];
 
 /**
@@ -151,16 +150,10 @@ function init() {
     action.play();
     for (var i = 0; i < BOX_QUANTITY; i++) {
       var angle = Math.PI * 2 * (i / BOX_QUANTITY);
-  //    var geometry = new THREE.BoxGeometry(BOX_SIZE, BOX_SIZE, BOX_SIZE);
-    //  var material = new THREE.MeshNormalMaterial();
-    //  var object = new THREE.Mesh(geometry, material);
       object.position.set(Math.cos(angle) * BOX_DISTANCE, camera.position.y - 0.25, Math.sin(angle) * BOX_DISTANCE);
+      object.scale.set(0.5, 0.5, 0.5);
       scene.add(object);
     }
-
-    //object.position.set(Math.cos(angle) * BOX_DISTANCE, camera.position.y - 0.25, Math.sin(angle) * BOX_DISTANCE);
-    //scene.add(object);
-
   });
 
   // Kick off the render loop!
@@ -190,7 +183,7 @@ function update() {
   // information applied to our camera (it can take a few seconds),
   // and the camera's Y position is not undefined or 0, create boxes
   if (!boxesAdded && !camera.position.y) {
-    addBoxes();
+   // addBoxes();
   }
 
   // Render our three.js virtual scene
