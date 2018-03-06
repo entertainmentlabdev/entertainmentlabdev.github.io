@@ -86,6 +86,7 @@ var BOX_DISTANCE = 1.5;
 var BOX_SIZE = 0.25;
 var BOX_QUANTITY = 1;
 var boxesAdded = false;
+var modelAdded = false;
 
 var mixers = [];
 
@@ -140,22 +141,6 @@ function init() {
   // Bind our event handlers
   window.addEventListener('resize', onWindowResize, false);
 
-  //Drew's animation code, source: https://threejs.org/examples/webgl_loader_fbx.html
-  var loader = new THREE.FBXLoader();
-  loader.load( 'assets/fbx/JellyFish_2.fbx', function (object) {
-    object.mixer = new THREE.AnimationMixer(object);
-    mixers.push(object.mixer);
-
-    var action = object.mixer.clipAction(object.animations[0]);
-    action.play();
-    for (var i = 0; i < BOX_QUANTITY; i++) {
-      var angle = Math.PI * 2 * (i / BOX_QUANTITY);
-      object.position.set(Math.cos(angle) * BOX_DISTANCE, camera.position.y - 0.25, Math.sin(angle) * BOX_DISTANCE);
-      object.scale.set(0.001, 0.001, 0.001);
-      scene.add(object);
-    }
-  });
-
   // Kick off the render loop!
   update();
 }
@@ -183,7 +168,11 @@ function update() {
   // information applied to our camera (it can take a few seconds),
   // and the camera's Y position is not undefined or 0, create boxes
   if (!boxesAdded && !camera.position.y) {
-   // addBoxes();
+    addBoxes();
+  }
+
+  if (!modelAdded && !camera.position.y) {
+    addModel();
   }
 
   // Render our three.js virtual scene
@@ -223,6 +212,26 @@ function addBoxes () {
 
   // Flip this switch so that we only perform this once
   boxesAdded = true;
+}
+
+function addModel () {
+  //Drew's animation code, source: https://threejs.org/examples/webgl_loader_fbx.html
+  var loader = new THREE.FBXLoader();
+  loader.load( 'assets/fbx/JellyFish_2.fbx', function (object) {
+    object.mixer = new THREE.AnimationMixer(object);
+    mixers.push(object.mixer);
+
+    var action = object.mixer.clipAction(object.animations[0]);
+    action.play();
+    for (var i = 0; i < BOX_QUANTITY; i++) {
+      var angle = Math.PI * 2 * (i / BOX_QUANTITY);
+      object.position.set(Math.cos(angle) * BOX_DISTANCE, camera.position.y - 0.25, Math.sin(angle) * BOX_DISTANCE);
+      object.scale.set(0.005, 0.005, 0.005);
+      scene.add(object);
+    }
+  });
+
+  modelAdded = true;
 }
 </script>
 </body>
